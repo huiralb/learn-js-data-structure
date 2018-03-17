@@ -1,3 +1,4 @@
-let stack = require('./stack.js')
+import {Queue} from './queue';
 
-console.log(stack)
+let queue = new Queue()
+console.log(queue)

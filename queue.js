@@ -28,8 +28,11 @@ function Queue() {
   }
 
   this.dequeue = () => {
-    console.log(`${this.front()} go enter->`)
     return items.shift()
+  }
+
+  this.size = () => {
+    return items.length
   }
 
   this.isEmpty = () => {
@@ -45,9 +48,26 @@ function Queue() {
   }
 }
 
-let queue = new Queue()
+function hotPotato (nameList, num){
+  let queue = new Queue()
+  for (let i = 0; i < nameList.length; i++) {
+    queue.enqueue(nameList[i])
+  }
+  
+  let eliminated = ''
+  while (queue.size() > 1) {
+    
+    for (let i = 0; i <num; i++) {
+      queue.enqueue(queue.dequeue())
+    }
+    eliminated = queue.dequeue()
+    console.log(eliminated+' was eliminasi')
+  }
+  return queue.dequeue()
+}
 
-queue.priorityEnqueue('John', 2)
-queue.priorityEnqueue('Jack', 1)
-queue.priorityEnqueue('Camila', 1)
-queue.print()
+let names = ['1.John', '2.Jack', '3.Camila', '4.Ingrid', '5.Carl']
+
+let winner = hotPotato(names, 5)
+
+console.log('The winner is:'+ winner)
