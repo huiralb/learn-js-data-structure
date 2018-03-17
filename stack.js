@@ -1,12 +1,11 @@
 function Stack() {
   let items = []
 
-  this.push = (el) => {
+  this.add = (el) => {
     items.push(el)
   }
 
-  this.pop = () => {
-    console.log('--pop--')
+  this.greb = () => {
     return items.pop()
   }
 
@@ -26,24 +25,38 @@ function Stack() {
     items = []
   }
 
+  this.get = () => {
+    return items
+  }
+
   this.print = () => {
     console.log(items.toString())
   }
 }
 
-let stack = new Stack()
+// bineri
 
-console.log('isEmpty: ',stack.isEmpty())
-stack.push(5)
-stack.push(8)
-console.log('peek: ', stack.peek())
-stack.push(11)
-console.log('size: ', stack.size())
-console.log('isEmpty: ', stack.isEmpty())
-stack.push(15)
-stack.print()
-console.log('----------')
-stack.pop()
-stack.pop()
-console.log('size: ', stack.size())
-stack.print()
+function decToBin(dec) {
+  // instan stack
+  let remStack = new Stack()
+  // sisa bagi
+  let rem;
+  // bineri string
+  let binString = ''
+
+  while(dec > 0) {
+    rem = Math.floor(dec % 2)
+    remStack.add(rem)
+    dec = Math.floor(dec / 2)
+  }
+  
+  while(!remStack.isEmpty()){
+    binString += remStack.greb().toString()
+  }
+
+  return binString;
+}
+
+let bin = decToBin(4)
+
+console.log(bin)
