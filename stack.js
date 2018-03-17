@@ -36,27 +36,31 @@ function Stack() {
 
 // bineri
 
-function decToBin(dec) {
+function baseConverter(dec, base) {
+  base = base || 2
   // instan stack
   let remStack = new Stack()
   // sisa bagi
   let rem;
   // bineri string
   let binString = ''
+  let digits = '0123456789ABCDEF'
 
   while(dec > 0) {
-    rem = Math.floor(dec % 2)
+    rem = Math.floor(dec % base)
     remStack.add(rem)
-    dec = Math.floor(dec / 2)
+    dec = Math.floor(dec / base)
   }
   
   while(!remStack.isEmpty()){
-    binString += remStack.greb().toString()
+    let greb = remStack.greb()
+    console.log('greb: ', greb)
+    binString += digits[greb]
   }
 
   return binString;
 }
 
-let bin = decToBin(4)
+let bin = baseConverter(128000, 16)
 
 console.log(bin)
